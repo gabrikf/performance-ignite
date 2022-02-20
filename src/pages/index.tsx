@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import { SearchREsults } from "../components/SerachResults";
 import { api } from "../services/api";
 import styles from "../styles/Home.module.css";
@@ -22,6 +22,10 @@ export default function Home() {
     });
     setSearchResults(response.data);
   }
+
+  const addToWishList = useCallback((id: number) => {
+    console.log(id);
+  });
   return (
     <div>
       <h1>Search</h1>
@@ -33,7 +37,7 @@ export default function Home() {
         />
         <button type="submit">Pesquisar</button>
       </form>
-      <SearchREsults results={searchResults} />
+      <SearchREsults onadd={addToWishList} results={searchResults} />
     </div>
   );
 }
